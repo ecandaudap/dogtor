@@ -6,7 +6,7 @@ from django.urls import path
 # Views
 # PascalCase -> clases -> modelos o vistas clase
 # snake_case -> para todo lo demas
-from .views import list_pet_owners, Test, OwnersList, OwnerDetail, PetsList, PetsDetail
+from .views import list_pet_owners, Test, OwnersList, OwnerDetail, PetsList, PetsDetail, OwnersCreate, OwnersUpdate, PetsUpdate, PetsCreate
 
 # alias (reversed urls) -> rutas de una app en especifico
 # alias (reversed urls) -> rutas del proyecto
@@ -22,7 +22,11 @@ from .views import list_pet_owners, Test, OwnersList, OwnerDetail, PetsList, Pet
 urlpatterns = [
     path("owners/", OwnersList.as_view(), name="owners_list"),
     path("owners/<int:pk>/", OwnerDetail.as_view(), name="owners_detail"),
-    path("pets/", PetsList.as_view()),
-    path("pets/<int:pk>/", PetsDetail.as_view()),
+    path("owners/add/", OwnersCreate.as_view(), name="owners_create"),
+    path("owners/<int:pk>/edit/", OwnersUpdate.as_view(), name="owners_edit"),
+    path("pets/", PetsList.as_view(), name = "pets_list" ),
+    path("pets/<int:pk>/", PetsDetail.as_view(), name = "pets_details"),
+    path("pets/add/", PetsCreate.as_view(), name="pets_create"),
+    path("pets/<int:pk>/edit/", PetsUpdate.as_view(), name="pets_edit"),
     path("test/", Test.as_view()),
 ]
