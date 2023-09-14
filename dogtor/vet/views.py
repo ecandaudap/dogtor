@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 
 # Models
@@ -70,8 +71,11 @@ class OwnersCreate(CreateView):
     # url a donde se va redireccionar si fue exitosa nuestra creación
     success_url = reverse_lazy("vet:owners_list")
 
-class OwnersUpdate(UpdateView):
+class OwnersUpdate(PermissionRequiredMixin,UpdateView):
     '''View used to update Petowner'''
+
+    permission_required = "vet.change_petowner"
+    raise_exception = True
 
     model = PetOwner
     template_name = "vet/owners/update.html"
