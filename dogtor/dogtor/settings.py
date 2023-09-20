@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'vet',
-    'blog'
+    'blog',
+    'authentication',
+    'rest_framework',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -80,8 +83,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "dogtor",
-        "USER": "eduardo",
-        "PASSWORD": "123",
+        "USER": "postgres",
         "HOST": "localhost",
         "PORT": "5432",
     }
@@ -117,6 +119,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+# URL's de redirección para login
+LOGIN_REDIRECT_URL = "vet/owners/"
+LOGOUT_REDIRECT_URL = "/"
+
+AUTH_USER_MODEL = "authentication.ModUser"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

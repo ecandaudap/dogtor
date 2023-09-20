@@ -75,7 +75,9 @@ class OwnersUpdate(PermissionRequiredMixin,UpdateView):
     '''View used to update Petowner'''
 
     permission_required = "vet.change_petowner"
-    raise_exception = True
+    raise_exception = False
+    login_url = "/admin/login" # En caso de que no hayamos iniciado sesión
+    redirect_field_name = "next"
 
     model = PetOwner
     template_name = "vet/owners/update.html"
