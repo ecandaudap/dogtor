@@ -2,10 +2,10 @@ from django.shortcuts import render
 from rest_framework import viewsets
 
 # Models
-from vet.models import PetOwner
+from vet.models import PetOwner, Pet, PetDate
 
 # Serializers
-from .serializers import OwnerSerializers
+from .serializers import OwnerSerializer, PetSerializer, PetDateSerializer
 
 # Create your views here.
 
@@ -19,4 +19,16 @@ class OwnerViewSet(viewsets.ModelViewSet):
     #2 El serializador
 
     queryset = PetOwner.objects.all()
-    serializer_class = OwnerSerializers
+    serializer_class = OwnerSerializer
+
+class PetViewSet(viewsets.ModelViewSet):
+    """Viewset del modelo Pet"""
+
+    queryset = Pet.objects.all()
+    serializer_class = PetSerializer
+
+class PetDateViewSet(viewsets.ModelViewSet):
+    """Viewset del modelo PetDate"""
+
+    queryset = PetDate.objects.all()
+    serializer_class = PetDateSerializer
