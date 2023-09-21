@@ -1,34 +1,66 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 
 # Models
 from vet.models import PetOwner, Pet, PetDate
 
 # Serializers
-from .serializers import OwnerSerializer, PetSerializer, PetDateSerializer
+from .serializers import OwnersListSerializer, OwnersDetailSerializer
 
 # Create your views here.
 
 
 # LIST -> GET
 # RETRIEVE -> GET
-class OwnerViewSet(viewsets.ModelViewSet):
-    """Viewset del modelo PetOwner"""
+# class OwnerViewSet(viewsets.ModelViewSet):
+#     """Viewset del modelo PetOwner"""
 
-    #1 queryset que se va realizar -> ORM
-    #2 El serializador
+#     #1 queryset que se va realizar -> ORM
+#     #2 El serializador
+
+#     queryset = PetOwner.objects.all()
+#     serializer_class = OwnerSerializer
+
+# class PetViewSet(viewsets.ModelViewSet):
+    # """Viewset del modelo Pet"""
+# 
+    # queryset = Pet.objects.all()
+    # serializer_class = PetSerializer
+# 
+# class PetDateViewSet(viewsets.ModelViewSet):
+    # """Viewset del modelo PetDate"""
+# 
+    # queryset = PetDate.objects.all()
+    # serializer_class = PetDateSerializer
+
+class ListOwnersAPIView(generics.ListAPIView):
+    """List Owners Api View"""
+
+    queryset = PetOwner.objects.all().order_by("created_at")
+   
+    # serializadores
+    serializer_class = OwnersListSerializer
+
+class RetrieveOwnersAPIView(generics.RetrieveAPIView):
+    """Detail Pet Owners Api View"""
 
     queryset = PetOwner.objects.all()
-    serializer_class = OwnerSerializer
+    serializer_class = OwnersDetailSerializer
 
-class PetViewSet(viewsets.ModelViewSet):
-    """Viewset del modelo Pet"""
+class CreateOwnersAPIView(generics.CreateAPIView):
+    """Create new Pet Owners Api View"""
 
-    queryset = Pet.objects.all()
-    serializer_class = PetSerializer
+    queryset = PetOwner.objects.all()
+    serializer_class = OwnersDetailSerializer
 
-class PetDateViewSet(viewsets.ModelViewSet):
-    """Viewset del modelo PetDate"""
+class UpdateOwnersAPIView(generics.UpdateAPIView):
+    """Update Pet Owners Api View"""
 
-    queryset = PetDate.objects.all()
-    serializer_class = PetDateSerializer
+    queryset = PetOwner.objects.all()
+    serializer_class = OwnersDetailSerializer
+
+class DestroyOwnersAPIView(generics.DestroyAPIView):
+    """Delete Pet Owners Api View"""
+
+    queryset = PetOwner.objects.all()
+    serializer_class = OwnersDetailSerializer
