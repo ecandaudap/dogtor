@@ -64,7 +64,7 @@ class OwnersDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PetOwner
-        fields ="_all_"
+        fields ="__all__"
 
 class OwnerCreateSerializer(serializers.ModelSerializer):
     """serializer to create Pet Owners"""
